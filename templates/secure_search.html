@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RB Labs - Secure Search</title>
+    <style>
+        body {
+            background: #0a0e27;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+        }
+        .box {
+            background: #1c233d;
+            width: 450px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #00c3ff;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            background: #ffffff22;
+            color: white;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            background: #00aaff;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            color: #00c3ff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>🔒 Secure Search</h2>
+
+    <form action="/secure_search" method="POST">
+        <input type="text" name="query" placeholder="Search username safely..." required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if result %}
+        <p><strong>Username:</strong> {{ result['username'] }}</p>
+        <p><strong>Email:</strong> {{ result['email'] }}</p>
+        <p><strong>Role:</strong> {{ result['role'] }}</p>
+    {% endif %}
+
+    <a href="/dashboard">⬅ Dashboard</a>
+</div>
+
+</body>
+</html>

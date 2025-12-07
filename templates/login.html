@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RB Labs - SQLi Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 flex items-center justify-center min-h-screen">
+
+<div class="bg-gray-800 rounded-2xl shadow-xl w-full max-w-md p-8 border border-gray-700">
+  <h1 class="text-2xl font-bold text-center text-blue-400 mb-2">
+    RB Labs - SQL Injection Lab
+  </h1>
+  <p class="text-center text-gray-400 mb-6 text-sm">
+    Learn Ethical Hacking With Real Web Labs – RB Education Hub
+  </p>
+
+  {% if error %}
+    <div class="bg-red-800 text-red-200 text-sm p-3 rounded mb-4 text-center">
+      {{ error }}
+    </div>
+  {% endif %}
+
+  <form method="post" class="space-y-4">
+    <div>
+      <label class="text-gray-300 text-sm">Username</label>
+      <input type="text" name="username" class="w-full mt-1 bg-gray-700 text-white p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="admin or try ' OR '1'='1">
+    </div>
+    <div>
+      <label class="text-gray-300 text-sm">Password</label>
+      <input type="password" name="password" class="w-full mt-1 bg-gray-700 text-white p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="admin123">
+    </div>
+    <button class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py  -2 rounded mt-2">
+      Login
+    </button>
+  </form>
+
+  <div class="mt-6 text-xs text-gray-400">
+    <p class="font-semibold text-yellow-400 mb-1">💣 SQLi Hint (Vulnerable Login)</p>
+    <p>Try payload:</p>
+    <code class="block bg-gray-900 p-2 rounded mt-1 text-green-400 text-xs">
+      admin' OR '1'='1 --
+    </code>
+    <p class="mt-1">
+      or even:
+    </p>
+    <code class="block bg-gray-900 p-2 rounded mt-1 text-green-400 text-xs">
+      ' OR '1'='1 --
+    </code>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RB Labs - SQLi Search</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+
+<nav class="bg-gray-800 border-b border-gray-700 p-4 flex justify-between items-center">
+  <div>
+    <h1 class="text-lg font-bold text-blue-400">RB Labs - SQL Injection Lab</h1>
+    <p class="text-xs text-gray-400">Vulnerable Search Page (SQL Injection)</p>
+  </div>
+  <div class="space-x-3 text-sm">
+    <a href="/dashboard" class="px-3 py-1 bg-gray-700 rounded hover:bg-gray-600">Dashboard</a>
+    <a href="/logout" class="px-3 py-1 bg-red-600 rounded hover:bg-red-500">Logout</a>
+  </div>
+</nav>
+
+<main class="p-6">
+  <h2 class="text-xl font-semibold mb-3">🔍 Search Users</h2>
+  <p class="text-gray-300 mb-3 text-sm">
+    This search is vulnerable to SQL Injection. Try extracting all users or sensitive info using payloads.
+  </p>
+
+  <form method="post" class="flex space-x-2 mb-4">
+    <input type="text" name="q" class="flex-1 bg-gray-800 border border-gray-700 p-2 rounded text-white text-sm"
+           placeholder="Search username... (try ' OR '1'='1 --)">
+    <button class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-500 text-sm">Search</button>
+  </form>
+
+  {% if result is not none %}
+    <h3 class="text-lg font-semibold mb-2">Results:</h3>
+    {% if result %}
+      <table class="w-full text-sm bg-gray-800 border border-gray-700 rounded overflow-hidden">
+        <thead class="bg-gray-700">
+          <tr>
+            <th class="p-2 text-left">Username</th>
+            <th class="p-2 text-left">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for row in result %}
+          <tr class="border-t border-gray-700">
+            <td class="p-2">{{ row.username }}</td>
+            <td class="p-2">{{ row.email }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="text-gray-400 text-sm">No results found.</p>
+    {% endif %}
+  {% endif %}
+
+  <div class="mt-6 text-xs text-gray-400">
+    <p class="font-semibold text-yellow-400 mb-1">💣 SQLi Hint (Search)</p>
+    <p>Try payloads like:</p>
+    <code class="block bg-gray-900 p-2 rounded mt-1 text-green-400">
+      ' OR '1'='1 --
+    </code>
+    <code class="block bg-gray-900 p-2 rounded mt-1 text-green-400">
+      ' UNION SELECT username, email FROM users --
+    </code>
+  </div>
+</main>
+
+</body>
+</html>
